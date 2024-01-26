@@ -173,44 +173,29 @@
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
-                        "databases": {
-                            "type": "object",
-                            "$ref:": "#/definitions/ObjectPrivilege"
-                        },
-                        "schemas": {
-                            "type": "object",
-                            "$ref:": "#/definitions/ObjectPrivilege"
-                        },
-                        "tables": {
-                            "type": "object",
-                            "$ref:": "#/definitions/ObjectPrivilege"
-                        }
+                        "databases": { "$ref": "#/definitions/AccessType" },
+                        "tables": { "$ref": "#/definitions/AccessType" },
+                        "schemas": { "$ref": "#/definitions/AccessType" }
                     }
                 }
             },
             "required": [],
             "title": "Role"
         },
-        "ObjectPrivilege": {
+        "AccessType": {
             "type": "object",
-            "additionalProperties": false,
             "properties": {
-                "read": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "write": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
+              "read": { "$ref": "#/definitions/PermissionList" },
+              "write": { "$ref": "#/definitions/PermissionList" }
             },
-            "required": [],
-            "title": "Privileges"
-        },
+            "additionalProperties": false
+          },
+          "PermissionList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
         "Databases": {
             "type": "object",
             "additionalProperties": false,
