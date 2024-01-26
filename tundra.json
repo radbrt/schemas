@@ -105,6 +105,12 @@
                         "type": "string"
                     }
                 },
+                "integrations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "member_of": {
                     "anyOf": [
                         { "$ref": "#/definitions/Inclusions" },
