@@ -64,10 +64,10 @@
             "properties": {
                 "shared": {
                     "type": "string"
-                },
+                }
             },
             "required": [],
-            "title": "Databasis"
+            "title": "Database"
         },
         "Integration": {
             "type": "object",
