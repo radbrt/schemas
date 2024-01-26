@@ -171,14 +171,18 @@
                 },
                 "privileges": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "databases": {
+                            "type": "object",
                             "$ref:": "#/definitions/ObjectPrivilege"
                         },
                         "schemas": {
+                            "type": "object",
                             "$ref:": "#/definitions/ObjectPrivilege"
                         },
                         "tables": {
+                            "type": "object",
                             "$ref:": "#/definitions/ObjectPrivilege"
                         }
                     }
