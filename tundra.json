@@ -60,7 +60,11 @@
                 "integrations": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Integration"
+                        "patternProperties": {
+                            "^[A-Za-z0-9_-]+$": { 
+                                "$ref": "#/definitions/Integration"
+                            }
+                        }
                     }
                 }
             },
