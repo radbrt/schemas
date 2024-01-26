@@ -92,7 +92,10 @@
             "properties": {
                 "category": {
                     "type": "string"
-                }
+                },
+                "owner": {
+                    "type": "string"
+                },
             },
             "required": [],
             "title": "Integration"
@@ -106,6 +109,9 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "owner": {
+                    "type": "string"
                 },
                 "integrations": {
                     "type": "array",
