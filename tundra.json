@@ -70,22 +70,20 @@
             },
             "required": [
                 "databases",
-                "integrations",
                 "roles",
-                "users",
                 "warehouses"
             ],
-            "title": "Welcome4"
+            "title": "Permifrost"
         },
         "Database": {
             "type": "object",
-            "additionalProperties": false,
+            "additionalProperties": true,
             "properties": {
                 "shared": {
                     "type": "string"
                 }
             },
-            "required": [],
+            "required": ["shared"],
             "title": "Database"
         },
         "Integration": {
@@ -228,6 +226,21 @@
             "additionalProperties": false,
             "properties": {
                 "size": {
+                    "type": "string",
+                    "enum": [
+                        "x-small", 
+                        "small", 
+                        "medium", 
+                        "large", 
+                        "x-large",
+                        "2x-large",
+                        "3x-large",
+                        "4x-large",
+                        "5x-large",
+                        "6x-large"
+                    ] 
+                },
+                "owner": {
                     "type": "string"
                 }
             },
@@ -246,6 +259,9 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "owner": {
+                    "type": "string"
                 }
             },
             "required": ["can_login"],
