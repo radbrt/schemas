@@ -6,36 +6,36 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "version": { // OK
+                "version": {
                     "type": "string",
                     "description": "Version of the permifrost schema"
                 },
-                "require-owner": { // OK
+                "require-owner": {
                     "type": "boolean",
                     "description": "Require that all objects have an owner"
                 },
-                "databases": { // OK
+                "databases": {
                     "type": "array",
                     "description": "List of databases with configuration",
                     "items": {
                         "$ref": "#/definitions/Database"
                     }
                 },
-                "roles": { // WIP
+                "roles": {
                     "type": "array",
                     "description": "List of roles and their access",
                     "items": {
                         "$ref": "#/definitions/Role"
                     }
                 },
-                "users": { // OK
+                "users": {
                     "type": "array",
                     "description": "List of the users and their access",
                     "items": {
                         "$ref": "#/definitions/User"
                     }
                 },
-                "warehouses": { // OK
+                "warehouses": {
                     "type": "array",
                     "description": "List of the warehouses and configuration",
                     "items": {
@@ -58,7 +58,7 @@
             ],
             "title": "Welcome4"
         },
-        "Database": { // HERE
+        "Database": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
