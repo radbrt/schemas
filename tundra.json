@@ -18,14 +18,22 @@
                     "type": "array",
                     "description": "List of databases with configuration",
                     "items": {
-                        "$ref": "#/definitions/Database"
+                        "patternProperties": {
+                            "^[A-Za-z0-9_-]+$": { 
+                                "$ref": "#/definitions/Database"
+                            }
+                        }
                     }
                 },
                 "roles": {
                     "type": "array",
                     "description": "List of roles and their access",
                     "items": {
-                        "$ref": "#/definitions/Role"
+                        "patternProperties": {
+                            "^[A-Za-z0-9_-]+$": { 
+                                "$ref": "#/definitions/Role"
+                            }
+                        }
                     }
                 },
                 "users": {
@@ -35,30 +43,18 @@
                         "patternProperties": {
                             "^[A-Za-z0-9_-]+$": { 
                                 "$ref": "#/definitions/User"
-                        }
+                            }
                         }
                     }
                 },
                 "warehouses": {
                     "type": "array",
                     "items": {
-                        "type": "object",
                         "patternProperties": {
-                        "^[A-Za-z0-9_-]+$": { 
-                            "type": "object",
-                            "properties": {
-                            "size": {
-                                "type": "string",
-                                "enum": ["x-small", "small", "medium", "large", "x-large"] 
+                            "^[A-Za-z0-9_-]+$": { 
+                                "$ref": "#/definitions/Warehouse"
                             }
-                            },
-                            "required": ["size"],
-                            "additionalProperties": false
                         }
-                        },
-                        "additionalProperties": false,
-                        "minProperties": 1,
-                        "maxProperties": 1
                     }
                 },
                 "integrations": {
@@ -234,6 +230,17 @@
                 "include"
             ],
             "title": "MemberOf"
+        },
+        "Warehouse": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "size": {
+                    "type": "string"
+                }
+            },
+            "required": ["size"],
+            "title": "Warehouse"
         },
         "User": {
             "type": "object",
