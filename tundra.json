@@ -95,7 +95,7 @@
                 },
                 "owner": {
                     "type": "string"
-                },
+                }
             },
             "required": [],
             "title": "Integration"
