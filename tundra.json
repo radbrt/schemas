@@ -19,7 +19,7 @@
                     "description": "List of databases with configuration",
                     "items": {
                         "patternProperties": {
-                            "^[A-Za-z0-9_-]+$": { 
+                            "^[A-Za-z0-9_]+$": { 
                                 "$ref": "#/definitions/Database"
                             }
                         }
@@ -30,7 +30,7 @@
                     "description": "List of roles and their access",
                     "items": {
                         "patternProperties": {
-                            "^[A-Za-z0-9_-]+$": { 
+                            "^[A-Za-z0-9_]+$": { 
                                 "$ref": "#/definitions/Role"
                             }
                         }
@@ -41,7 +41,7 @@
                     "description": "List of the users and their access",
                     "items": {
                         "patternProperties": {
-                            "^[A-Za-z0-9_-]+$": { 
+                            "^[A-Za-z0-9_]+$": { 
                                 "$ref": "#/definitions/User"
                             }
                         }
@@ -51,7 +51,7 @@
                     "type": "array",
                     "items": {
                         "patternProperties": {
-                            "^[A-Za-z0-9_-]+$": { 
+                            "^[A-Za-z0-9_]+$": { 
                                 "$ref": "#/definitions/Warehouse"
                             }
                         }
@@ -61,7 +61,7 @@
                     "type": "array",
                     "items": {
                         "patternProperties": {
-                            "^[A-Za-z0-9_-]+$": { 
+                            "^[A-Za-z0-9_]+$": { 
                                 "$ref": "#/definitions/Integration"
                             }
                         }
@@ -117,15 +117,32 @@
                 },
                 "member_of": {
                     "anyOf": [
-                        { "$ref": "#/definitions/Inclusions" },
-                        { "$ref": "#/definitions/Exclusions" },
                         {
                             "type": "array",
-                            "description": "Yay thing",
-                            "items": { "type": "string" }
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                        "type": "object",
+                        "properties": {
+                            "include": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "exclude": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
                         }
                     ]
-                },
+                    },
                 "owns": {
                     "properties": {
                         "databases": {
@@ -166,18 +183,6 @@
             "required": [],
             "title": "Role"
         },
-        "Inclusions": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
-        },
-        "Exclusions": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
-        },
         "ObjectPrivilege": {
             "type": "object",
             "additionalProperties": false,
@@ -217,29 +222,6 @@
             },
             "required": [],
             "title": "Databases"
-        },
-        "MemberOf": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "include": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "exclude": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "exclude",
-                "include"
-            ],
-            "title": "MemberOf"
         },
         "Warehouse": {
             "type": "object",
