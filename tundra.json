@@ -6,36 +6,36 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "version": {
+                "version": { // OK
                     "type": "string",
                     "description": "Version of the permifrost schema"
                 },
-                "require-owner": {
+                "require-owner": { // OK
                     "type": "boolean",
                     "description": "Require that all objects have an owner"
                 },
-                "databases": {
+                "databases": { // OK
                     "type": "array",
                     "description": "List of databases with configuration",
                     "items": {
-                        "$ref": "#/definitions/Databasis"
+                        "$ref": "#/definitions/Database"
                     }
                 },
-                "roles": {
+                "roles": { // WIP
                     "type": "array",
                     "description": "List of roles and their access",
                     "items": {
                         "$ref": "#/definitions/Role"
                     }
                 },
-                "users": {
+                "users": { // OK
                     "type": "array",
                     "description": "List of the users and their access",
                     "items": {
                         "$ref": "#/definitions/User"
                     }
                 },
-                "warehouses": {
+                "warehouses": { // OK
                     "type": "array",
                     "description": "List of the warehouses and configuration",
                     "items": {
@@ -58,47 +58,18 @@
             ],
             "title": "Welcome4"
         },
-        "Databasis": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "demo": {
-                    "$ref": "#/definitions/SharedDemoClass"
-                },
-                "shared_demo": {
-                    "$ref": "#/definitions/SharedDemoClass"
-                }
-            },
-            "required": [],
-            "title": "Databasis"
-        },
-        "SharedDemoClass": {
+        "Database": { // HERE
             "type": "object",
             "additionalProperties": false,
             "properties": {
                 "shared": {
                     "type": "string"
-                }
+                },
             },
-            "required": [
-                "shared"
-            ],
-            "title": "SharedDemoClass"
+            "required": [],
+            "title": "Databasis"
         },
         "Integration": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "demo": {
-                    "$ref": "#/definitions/IntegrationDemo"
-                }
-            },
-            "required": [
-                "demo"
-            ],
-            "title": "Integration"
-        },
-        "IntegrationDemo": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -106,35 +77,10 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "category"
-            ],
-            "title": "IntegrationDemo"
+            "required": [],
+            "title": "Integration"
         },
         "Role": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "accountadmin": {
-                    "$ref": "#/definitions/Admin"
-                },
-                "securityadmin": {
-                    "$ref": "#/definitions/Admin"
-                },
-                "useradmin": {
-                    "$ref": "#/definitions/Useradmin"
-                },
-                "sysadmin": {
-                    "$ref": "#/definitions/Sysadmin"
-                },
-                "demo": {
-                    "$ref": "#/definitions/RoleDemo"
-                }
-            },
-            "required": [],
-            "title": "Role"
-        },
-        "Admin": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -145,91 +91,86 @@
                     }
                 },
                 "member_of": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "member_of",
-                "warehouses"
-            ],
-            "title": "Admin"
-        },
-        "RoleDemo": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "warehouses": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "integrations": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "anyOf": [
+                        { "$ref": "#/definitions/Inclusions" },
+                        { "$ref": "#/definitions/Exclusions" },
+                        {
+                            "type": "array",
+                            "description": "Yay thing",
+                            "items": { "type": "string" }
+                        }
+                    ]
                 },
                 "owns": {
-                    "$ref": "#/definitions/Owns"
+                    "properties": {
+                        "databases": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "schemas": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "tables": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
                 },
                 "privileges": {
-                    "$ref": "#/definitions/Privileges"
+                    "type": "object",
+                    "properties": {
+                        "databases": {
+                            "$ref:": "#/definitions/ObjectPrivilege"
+                        },
+                        "schemas": {
+                            "$ref:": "#/definitions/ObjectPrivilege"
+                        },
+                        "tables": {
+                            "$ref:": "#/definitions/ObjectPrivilege"
+                        }
+                    }
                 }
             },
-            "required": [
-                "integrations",
-                "owns",
-                "privileges",
-                "warehouses"
-            ],
-            "title": "RoleDemo"
+            "required": [],
+            "title": "Role"
         },
-        "Owns": {
+        "Inclusions": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "Exclusions": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "ObjectPrivilege": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "schemas": {
+                "read": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
-                "tables": {
+                "write": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 }
             },
-            "required": [
-                "schemas",
-                "tables"
-            ],
-            "title": "Owns"
-        },
-        "Privileges": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "databases": {
-                    "$ref": "#/definitions/Databases"
-                },
-                "schemas": {
-                    "$ref": "#/definitions/Databases"
-                },
-                "tables": {
-                    "$ref": "#/definitions/Databases"
-                }
-            },
-            "required": [
-                "databases",
-                "schemas",
-                "tables"
-            ],
+            "required": [],
             "title": "Privileges"
         },
         "Databases": {
@@ -249,31 +190,8 @@
                     }
                 }
             },
-            "required": [
-                "read",
-                "write"
-            ],
+            "required": [],
             "title": "Databases"
-        },
-        "Sysadmin": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "warehouses": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "member_of": {
-                    "$ref": "#/definitions/MemberOf"
-                }
-            },
-            "required": [
-                "member_of",
-                "warehouses"
-            ],
-            "title": "Sysadmin"
         },
         "MemberOf": {
             "type": "object",
@@ -298,37 +216,7 @@
             ],
             "title": "MemberOf"
         },
-        "Useradmin": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "warehouses": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "warehouses"
-            ],
-            "title": "Useradmin"
-        },
         "User": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "airflow_demo": {
-                    "$ref": "#/definitions/Demo"
-                },
-                "dbt_demo": {
-                    "$ref": "#/definitions/Demo"
-                }
-            },
-            "required": [],
-            "title": "User"
-        },
-        "Demo": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -342,33 +230,10 @@
                     }
                 }
             },
-            "required": [
-                "can_login",
-                "member_of"
-            ],
-            "title": "Demo"
+            "required": ["can_login"],
+            "title": "User"
         },
         "Warehouse": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "loading": {
-                    "$ref": "#/definitions/LoadingClass"
-                },
-                "reporting": {
-                    "$ref": "#/definitions/LoadingClass"
-                },
-                "transforming": {
-                    "$ref": "#/definitions/LoadingClass"
-                },
-                "demo": {
-                    "$ref": "#/definitions/LoadingClass"
-                }
-            },
-            "required": [],
-            "title": "Warehouse"
-        },
-        "LoadingClass": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -376,10 +241,8 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "size"
-            ],
-            "title": "LoadingClass"
+            "required": ["size"],
+            "title": "Warehouse"
         }
     }
 }
