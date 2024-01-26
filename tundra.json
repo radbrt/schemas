@@ -185,17 +185,17 @@
         "AccessType": {
             "type": "object",
             "properties": {
-              "read": { "$ref": "#/definitions/PermissionList" },
-              "write": { "$ref": "#/definitions/PermissionList" }
+                "read": { "$ref": "#/definitions/PermissionList" },
+                "write": { "$ref": "#/definitions/PermissionList" }
             },
             "additionalProperties": false
-          },
-          "PermissionList": {
+        },
+        "PermissionList": {
             "type": "array",
             "items": {
-              "type": "string"
+                "type": "string"
             }
-          },
+        },
         "Databases": {
             "type": "object",
             "additionalProperties": false,
