@@ -37,9 +37,24 @@
                 },
                 "warehouses": {
                     "type": "array",
-                    "description": "List of the warehouses and configuration",
                     "items": {
-                        "$ref": "#/definitions/Warehouse"
+                        "type": "object",
+                        "patternProperties": {
+                        "^[A-Za-z0-9_-]+$": {  // Adjust the regex pattern as needed for allowed property names
+                            "type": "object",
+                            "properties": {
+                            "size": {
+                                "type": "string",
+                                "enum": ["x-small", "small", "medium", "large", "x-large"] // List of allowed sizes
+                            }
+                            },
+                            "required": ["size"],
+                            "additionalProperties": false
+                        }
+                        },
+                        "additionalProperties": false,
+                        "minProperties": 1,
+                        "maxProperties": 1
                     }
                 },
                 "integrations": {
@@ -232,22 +247,6 @@
             },
             "required": ["can_login"],
             "title": "User"
-        },
-        "Warehouse": {
-            "type": "object",
-            "patternProperties": {
-                "^[A-Za-z0-9_-]+$": {  
-                    "type": "object",
-                    "properties": {
-                        "size": {
-                            "type": "string",
-                            "enum": ["x-small", "small", "medium", "large", "x-large"] 
-                        }
-                    },
-                    "required": ["size"],
-                    "additionalProperties": false
-                }
-            }
         }
     }
 }
