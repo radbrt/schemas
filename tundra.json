@@ -236,16 +236,17 @@
         "Warehouse": {
             "type": "object",
             "patternProperties": {
-                "^[A-Za-z0-9_-]+$": {  // Adjust the regex pattern as needed for allowed property names
-                "type": "object",
-                "properties": {
-                "size": {
-                    "type": "string",
-                    "enum": ["x-small", "small", "medium", "large", "x-large"] // List of allowed sizes
+                "^[A-Za-z0-9_-]+$": {  
+                    "type": "object",
+                    "properties": {
+                        "size": {
+                            "type": "string",
+                            "enum": ["x-small", "small", "medium", "large", "x-large"] 
+                        }
+                    },
+                    "required": ["size"],
+                    "additionalProperties": false
                 }
-                },
-                "required": ["size"],
-                "additionalProperties": false
             }
         }
     }
