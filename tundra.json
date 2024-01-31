@@ -81,6 +81,12 @@
             "properties": {
                 "shared": {
                     "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "meta": {
+                    "type": "object"
                 }
             },
             "required": ["shared"],
@@ -95,6 +101,9 @@
                 },
                 "owner": {
                     "type": "string"
+                },
+                "meta": {
+                    "type": "object"
                 }
             },
             "required": [],
@@ -143,6 +152,7 @@
                                 }
                             }
                         },
+                        "required": ["include"],
                         "additionalProperties": false
                         }
                     ]
@@ -177,6 +187,9 @@
                         "tables": { "$ref": "#/definitions/AccessType" },
                         "schemas": { "$ref": "#/definitions/AccessType" }
                     }
+                },
+                "meta": {
+                    "type": "object"
                 }
             },
             "required": [],
@@ -247,7 +260,7 @@
             "additionalProperties": false,
             "properties": {
                 "can_login": {
-                    "type": "string"
+                    "type": "boolean"
                 },
                 "member_of": {
                     "type": "array",
@@ -256,6 +269,39 @@
                     }
                 },
                 "owner": {
+                    "type": "string"
+                },
+                "has_password": {
+                    "type": "boolean"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "middle_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "default_warehouse": {
+                    "type": "string"
+                },
+                "default_namespace": {
+                    "type": "string"
+                },
+                "default_role": {
+                    "type": "string"
+                },
+                "meta": {
                     "type": "string"
                 }
             },
