@@ -260,7 +260,11 @@
             "additionalProperties": false,
             "properties": {
                 "can_login": {
-                    "type": "boolean"
+                    "type": "string",
+                    "enum": [
+                        "no", 
+                        "yes"
+                    ] 
                 },
                 "member_of": {
                     "type": "array",
